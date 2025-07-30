@@ -2,7 +2,7 @@
 
 > A robust and reusable Bash script for parsing web server logs to identify and rank the sources of '404 Not Found' errors.
 
-This project is the second deliverable of the "AI Infrastructure Engineer Roadmap." It builds upon foundational command-line skills by chaining together powerful text-processing utilities to create a practical data analysis pipeline.
+This project builds upon foundational command-line skills by chaining together powerful text-processing utilities to create a practical data analysis pipeline.
 
 ## Overview
 
