@@ -71,3 +71,6 @@ grep "404" "$LOG_FILE": First, grep reads the log file and acts as a filter, kee
 | sort -nr: The output of counts and IPs is piped to sort -nr for a final sorting. -n sorts numerically, and -r sorts in reverse (descending) order, placing the highest counts at the top.
 
 | head -n 10: Finally, the fully sorted list is piped to head -n 10, which gives us only the top 10 lines of the output, completing our report.
+
+## License
+this is under MIT license
