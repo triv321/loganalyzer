@@ -1,4 +1,4 @@
-# Project 1.2: Command-Line Log Analyzer
+# Project: Command-Line Log Analyzer
 
 > A robust and reusable Bash script for parsing web server logs to identify and rank the sources of '404 Not Found' errors.
 
