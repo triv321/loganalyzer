@@ -73,8 +73,4 @@ grep "404" "$LOG_FILE": First, grep reads the log file and acts as a filter, kee
 | head -n 10: Finally, the fully sorted list is piped to head -n 10, which gives us only the top 10 lines of the output, completing our report.
 
 ## License
-<<<<<<< HEAD
-Private
-=======
-this is under MIT license
->>>>>>> 1d7f411633f5a47fba5e5407597a48acc1b6dcfa
+private
