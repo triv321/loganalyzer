@@ -50,6 +50,17 @@ This script is designed to run in a standard Linux/Unix-like environment (includ
     ```
     The script will then print a formatted list of the top 10 IP addresses and their error counts.
 
+## Testing with `sample.log`
+
+A sample log file named `sample.log` is included in this repository. You can use it to test the script's functionality without needing a real server log.
+
+**To run the test:**
+```bash
+./log_analyser.sh sample.log
+```
+
+This will run the analyzer on the sample data and should produce a ranked list of the IP addresses found in that file.
+
 ## How It Works: The Data Pipeline
 
 The core of the `log_analyzer.sh` script is a single, elegant command pipeline that processes the data in stages.
@@ -57,20 +68,42 @@ The core of the `log_analyzer.sh` script is a single, elegant command pipeline t
 ```bash
 # Inside log_analyzer.sh
 grep "404" "$LOG_FILE" | awk '{print $1}' | sort | uniq -c | sort -nr | head -n 10
+```
 
 Here is how this pipeline works:
 
-grep "404" "$LOG_FILE": First, grep reads the log file and acts as a filter, keeping only the lines that contain the "404" status code.
+1.  **`grep "404" "$LOG_FILE"`**: First, `grep` reads the log file and acts as a filter, keeping only the lines that contain the "404" status code.
 
-| awk '{print $1}': The remaining lines (only the error lines) are piped to awk, which extracts only the first column—the IP address—from each line.
+2.  **`| awk '{print $1}'`**: The remaining lines (only the error lines) are piped to `awk`, which extracts only the first column—the IP address—from each line.
 
-| sort: The resulting list of IP addresses is then sorted alphabetically. This places all identical IPs next to each other, which is required for uniq to work correctly.
+3.  **`| sort`**: The resulting list of IP addresses is then sorted alphabetically. This places all identical IPs next to each other, which is required for `uniq` to work correctly.
 
-| uniq -c: The sorted list is piped to uniq -c, which counts the occurrences of each unique IP address and prepends the count to the line.
+4.  **`| uniq -c`**: The sorted list is piped to `uniq -c`, which counts the occurrences of each unique IP address and prepends the count to the line.
 
-| sort -nr: The output of counts and IPs is piped to sort -nr for a final sorting. -n sorts numerically, and -r sorts in reverse (descending) order, placing the highest counts at the top.
+5.  **`| sort -nr`**: The output of counts and IPs is piped to `sort -nr` for a final sorting. `-n` sorts numerically, and `-r` sorts in reverse (descending) order, placing the highest counts at the top.
 
-| head -n 10: Finally, the fully sorted list is piped to head -n 10, which gives us only the top 10 lines of the output, completing our report.
+6.  **`| head -n 10`**: Finally, the fully sorted list is piped to `head -n 10`, which gives us only the top 10 lines of the output, completing our report.
 
 ## License
-na
+
+This project is licensed under the MIT License.
+
+Copyright (c) 2023 Jules
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
